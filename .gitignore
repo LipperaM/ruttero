@@ -1,1 +1,7 @@
 .env
+
+# traefik
+traefik/acme.json
+
+# db
+/mysql/data/
