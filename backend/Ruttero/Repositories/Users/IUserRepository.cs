@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Ruttero.Models;
 
-namespace Ruttero.Repositories
+namespace Ruttero.Interfaces.Repositories
 {
     public interface IUserRepository
     {

@@ -12,8 +12,8 @@ namespace Ruttero.Models
 
         public decimal Price { get; set; }
 
-        public bool IsActive { get; set; } = true;  // tinyint(1) DEFAULT '1' => bool con default true
+        public bool IsActive { get; set; } = true;  // default true
 
-        public DateTime? CreatedAt { get; set; }    // timestamp NULL DEFAU
+        public DateTime? CreatedAt { get; set; }    // timestamp NULL DEFAULT
     }
 }

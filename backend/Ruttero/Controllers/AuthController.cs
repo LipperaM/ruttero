@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Ruttero.Dtos.Auth;
+using Ruttero.Interfaces.Services;
 using Ruttero.Models;
 using Ruttero.Services;
 
+// Login / SignUp
 namespace Ruttero.Controllers
 {
     // SignUp
@@ -11,7 +13,7 @@ namespace Ruttero.Controllers
     public class SignUpController : ControllerBase
     {
         private readonly IAuthService _iAuthService;
-        
+
         public SignUpController(IAuthService iAuthService)
         {
             _iAuthService = iAuthService;
@@ -20,8 +22,8 @@ namespace Ruttero.Controllers
         [HttpPost]
         public async Task<ActionResult<SignUpResponseDto>> Post([FromBody] SignUpRequestDto requestDto)
         {
-            if (string.IsNullOrWhiteSpace(requestDto.Username) || 
-            string.IsNullOrWhiteSpace(requestDto.Email) || 
+            if (string.IsNullOrWhiteSpace(requestDto.Username) ||
+            string.IsNullOrWhiteSpace(requestDto.Email) ||
             string.IsNullOrWhiteSpace(requestDto.Password))
             {
                 return BadRequest("Complete todos los campos");

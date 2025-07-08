@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruttero.Models
 {
-    
     [Table("drivers")]
     public class Driver
     {
@@ -13,10 +12,13 @@ namespace Ruttero.Models
 
         public string Surname { get; set; } = null!;
 
+        [Column("national_id")]
         public string NationalId { get; set; } = null!;
 
+        [Column("is_active")]
         public bool IsActive { get; set; } = true;
-
+        
+        [Column("created_at")]
         public DateTime? CreatedAt { get; set; }
     }
 }

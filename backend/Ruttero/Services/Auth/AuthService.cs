@@ -10,6 +10,8 @@ using System.Security.Claims;
 using System.Text;
 using BCrypt.Net;
 using Ruttero.Repositories;
+using Ruttero.Interfaces.Services;
+using Ruttero.Interfaces.Repositories;
 
 namespace Ruttero.Services
 {

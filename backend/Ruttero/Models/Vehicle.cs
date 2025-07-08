@@ -14,13 +14,12 @@ namespace Ruttero.Models
 
         public string? Brand { get; set; }
 
-        public int? DriverId { get; set; }  // FK nullable
+        public int? DriverId { get; set; } 
 
         public bool IsActive { get; set; } = true;
 
         public DateTime? CreatedAt { get; set; }
 
-        // Navegación hacia Driver
         public Driver? Driver { get; set; }
     }
 }

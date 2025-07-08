@@ -1,7 +1,7 @@
 using Ruttero.Dtos.Auth;
 using System.Threading.Tasks;
 
-namespace Ruttero.Services
+namespace Ruttero.Interfaces.Services
 {
     public interface IAuthService
     {

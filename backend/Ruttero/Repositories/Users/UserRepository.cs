@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Ruttero.Models;
 using Ruttero.Data;
 using Microsoft.EntityFrameworkCore;
+using Ruttero.Interfaces.Repositories;
 
 
 namespace Ruttero.Repositories
