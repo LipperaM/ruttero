@@ -1,4 +1,22 @@
 services:
+  api:
+    build:
+      context: ./backend/Ruttero
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ConnectionStrings__DefaultConnection: server=mysql;database=${MYSQL_DATABASE};user=${MYSQL_USER};password=${MYSQL_PASSWORD}
+      JWT_KEY: ${JWT_KEY}
+      JWT_ISSUER: ${JWT_ISSUER}
+      JWT_AUDIENCE: ${JWT_AUDIENCE}
+    depends_on:
+      - mysql 
+    networks:                                                                                                                                                                              
+      - net  
+
   mysql:
     image: mysql:8.4.5
     container_name: mysql_db

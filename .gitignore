@@ -1,7 +1,54 @@
+# environment
 .env
 
 # traefik
 traefik/acme.json
 
+# api
+## Ignore build output folders
+bin/
+obj/
+
+## Ignore Visual Studio workspace settings and caches
+.vs/
+
+## Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Ignore appsettings files for local development (may contain secrets)
+appsettings.Development.json
+appsettings.Local.json
+
+## Ignore NuGet packages folder (if packages are restored on build)
+packages/
+
+## Ignore logs
+*.log
+
+## Ignore publish profiles
+*.pubxml
+*.publishsettings
+
+## Ignore any generated temporary files or OS files
+*.pidb
+*.class
+*.cache
+*.dll
+*.exe
+*.pdb
+*.vspscc
+*.vssscc
+
+## Ignore Docker Compose override files if used for local overrides
+docker-compose.override.yml
+
 # db
 /mysql/data/
+
+# VS Code
+.vscode/
+*.code-workspace
+
