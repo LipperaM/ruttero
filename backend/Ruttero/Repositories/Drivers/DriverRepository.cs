@@ -33,6 +33,7 @@ namespace Ruttero.Repositories
 
         public async Task UpdateAsync(Driver driver)
         {
+            _context.Drivers.Update(driver);
             await _context.SaveChangesAsync();
         }
     }
