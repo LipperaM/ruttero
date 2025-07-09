@@ -31,10 +31,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add services to the container.
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<IFareService, FareService>();
+
 
 // Add repositories to the container.
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDriverRepository, DriverRepository>();
+builder.Services.AddScoped<IFareRepository, FareRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

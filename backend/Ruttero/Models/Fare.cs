@@ -12,8 +12,10 @@ namespace Ruttero.Models
 
         public decimal Price { get; set; }
 
+        [Column("is_active")]
         public bool IsActive { get; set; } = true;  // default true
 
+        [Column("created_at")]
         public DateTime? CreatedAt { get; set; }    // timestamp NULL DEFAULT
     }
 }
