@@ -8,6 +8,7 @@
 | (Opcional) Actualizar |PUT/PATCH| `/api/vehicles/{id}` |
 */
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 //using Ruttero.Dtos.Vehicles;
 using Ruttero.Models;
@@ -15,7 +16,7 @@ using Ruttero.Services;
 
 namespace Ruttero.Controllers
 {
-    // Create vehicle
+    [Authorize]
     [ApiController]
     [Route("api/vehicles")]
     public class VehiclesController : ControllerBase

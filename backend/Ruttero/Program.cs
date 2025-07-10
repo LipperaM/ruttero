@@ -41,7 +41,40 @@ builder.Services.AddScoped<IFareRepository, FareRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+
+// Enable JWT for Swagger
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new() { Title = "Ruttero API", Version = "v1" });
+
+    // Configuración para JWT Bearer en Swagger
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Ingrese 'Bearer' seguido del token JWT.\n\nEjemplo: Bearer eyJhbGciOiJIUzI1NiIs..."
+    });
+
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
+
 
 // JWT
 var jwtKey = builder.Configuration["Jwt:Key"]

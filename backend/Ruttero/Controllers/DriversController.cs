@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ruttero.Dtos.Drivers;
 using Ruttero.Interfaces.Services;
@@ -5,7 +6,7 @@ using Ruttero.Models;
 
 namespace Ruttero.Controllers
 {
-    // SignUp
+    [Authorize]
     [ApiController]
     [Route("api/drivers")]
     public class DriversController : ControllerBase
@@ -17,6 +18,7 @@ namespace Ruttero.Controllers
             _iDriverService = iDriverService;
         }
 
+        // Create a driver
         [HttpPost]
         public async Task<ActionResult<DriverResponseDto>> Post([FromBody] CreateDriverRequestDto requestDto)
         {
@@ -35,6 +37,7 @@ namespace Ruttero.Controllers
             return Ok(responseDto);
         }
 
+        // Update a driver status
         [HttpPatch]
         public async Task<ActionResult<DriverResponseDto>> Patch([FromBody] UpdateDriverRequestDto requestDto)
         {

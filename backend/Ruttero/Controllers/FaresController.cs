@@ -5,16 +5,17 @@
 | Obtener por ID        | GET     | `/api/fares/{id}` |
 | Crear uno             | POST    | `/api/fares`      |
 | Eliminar uno          | DELETE  | `/api/fares/{id}` |
-| (Opcional) Actualizar |PUT/PATCH| `/api/fares/{id}` |
+| Actualizar            |PUT/PATCH| `/api/fares/{id}` |
 */
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ruttero.Dtos.Fares;
 using Ruttero.Interfaces.Services;
 
 namespace Ruttero.Controllers
 {
-    // Create fare
+    [Authorize]
     [ApiController]
     [Route("api/fares")]
     public class FaresController : ControllerBase
@@ -26,6 +27,7 @@ namespace Ruttero.Controllers
             _iFareService = iFareService;
         }
 
+        // Create a fare
         [HttpPost]
         public async Task<ActionResult<FareResponseDto>> Post([FromBody] CreateFareRequestDto requestDto)
         {
