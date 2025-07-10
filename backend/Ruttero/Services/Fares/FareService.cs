@@ -13,12 +13,13 @@ namespace Ruttero.Services
         {
             _fareRepository = fareRepository;
         }
-        public async Task<FareResponseDto> CreateFareAsync(CreateFareRequestDto requestDto)
+        public async Task<FareResponseDto> CreateFareAsync(CreateFareRequestDto requestDto, int userId)
         {
             var newFare = new Fare
             {
                 Description = requestDto.Description,
                 Price = requestDto.Price,
+                CreatedBy = userId,
                 CreatedAt = DateTime.UtcNow
             };
 

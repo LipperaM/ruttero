@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruttero.Models
@@ -14,6 +13,11 @@ namespace Ruttero.Models
 
         [Column("is_active")]
         public bool IsActive { get; set; } = true;  // default true
+
+        [Column("created_by")]
+        public int CreatedBy { get; set; } // user id
+        [ForeignKey("CreatedBy")]
+        public User User { get; set; } = null!;
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }    // timestamp NULL DEFAULT

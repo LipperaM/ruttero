@@ -8,6 +8,7 @@
 | Actualizar            |PUT/PATCH| `/api/fares/{id}` |
 */
 
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ruttero.Dtos.Fares;
@@ -31,13 +32,20 @@ namespace Ruttero.Controllers
         [HttpPost]
         public async Task<ActionResult<FareResponseDto>> Post([FromBody] CreateFareRequestDto requestDto)
         {
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userIdString == null)
+                return Unauthorized();
+
+            int userId = int.Parse(userIdString);
+
             if (string.IsNullOrWhiteSpace(requestDto.Description) ||
             requestDto.Price <= 0)
             {
                 return BadRequest("Complete todos los campos");
             }
 
-            var responseDto = await _iFareService.CreateFareAsync(requestDto);
+            var responseDto = await _iFareService.CreateFareAsync(requestDto, userId);
 
             if (!responseDto.Success)
                 return BadRequest(responseDto.Message);
