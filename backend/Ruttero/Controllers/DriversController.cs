@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ruttero.Dtos.Drivers;
@@ -22,6 +23,14 @@ namespace Ruttero.Controllers
         [HttpPost]
         public async Task<ActionResult<DriverResponseDto>> Post([FromBody] CreateDriverRequestDto requestDto)
         {
+            // Find userId in JWT token claims
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userIdString == null)
+                return Unauthorized();
+
+            int userId = int.Parse(userIdString);
+
             if (string.IsNullOrWhiteSpace(requestDto.Name) ||
             string.IsNullOrWhiteSpace(requestDto.Surname) ||
             string.IsNullOrWhiteSpace(requestDto.NationalId))
@@ -29,7 +38,7 @@ namespace Ruttero.Controllers
                 return BadRequest("Complete todos los campos");
             }
 
-            var responseDto = await _iDriverService.CreateDriverAsync(requestDto);
+            var responseDto = await _iDriverService.CreateDriverAsync(requestDto, userId);
 
             if (!responseDto.Success)
                 return BadRequest(responseDto.Message);

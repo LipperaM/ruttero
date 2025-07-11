@@ -12,10 +12,12 @@ namespace Ruttero.Models
 
         public string Email { get; set; } = null!;
 
-        public string Password_Hash { get; set; } = null!;
+        [Column("password_hash")]
+        public string PasswordHash { get; set; } = null!;
 
         public string Role { get; set; } = "client";
 
-        public DateTime? Created_At { get; set; }
+        [Column("created_at")]
+        public DateTime? CreatedAt { get; set; }
     }
 }

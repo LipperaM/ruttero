@@ -4,7 +4,7 @@ using Ruttero.Interfaces.Services;
 using Ruttero.Models;
 using Ruttero.Services;
 
-// Login / SignUp
+// SignUp / Login
 namespace Ruttero.Controllers
 {
     // SignUp
@@ -12,6 +12,7 @@ namespace Ruttero.Controllers
     [Route("api/signup")]
     public class SignUpController : ControllerBase
     {
+        // Inject dependency: IAuthService
         private readonly IAuthService _iAuthService;
 
         public SignUpController(IAuthService iAuthService)
@@ -19,6 +20,7 @@ namespace Ruttero.Controllers
             _iAuthService = iAuthService;
         }
 
+        // SignUp endpoint
         [HttpPost]
         public async Task<ActionResult<SignUpResponseDto>> Post([FromBody] SignUpRequestDto requestDto)
         {
@@ -43,6 +45,7 @@ namespace Ruttero.Controllers
     [Route("api/login")]
     public class LoginController : ControllerBase
     {
+        // Inject dependency: IAuthService
         private readonly IAuthService _iAuthService;
 
         public LoginController(IAuthService iAuthService)
@@ -50,6 +53,7 @@ namespace Ruttero.Controllers
             _iAuthService = iAuthService;
         }
 
+        // Login endpoint
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] LoginRequestDto requestDto)
         {

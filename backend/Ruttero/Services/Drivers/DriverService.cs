@@ -13,7 +13,7 @@ namespace Ruttero.Services
         {
             _driverRepository = driverRepository;
         }
-        public async Task<DriverResponseDto> CreateDriverAsync(CreateDriverRequestDto requestDto)
+        public async Task<DriverResponseDto> CreateDriverAsync(CreateDriverRequestDto requestDto, int userId)
         {
             if (await _driverRepository.ExistsByNationalIdAsync(requestDto.NationalId))
             {
@@ -29,6 +29,7 @@ namespace Ruttero.Services
                 Name = requestDto.Name,
                 Surname = requestDto.Surname,
                 NationalId = requestDto.NationalId,
+                CreatedBy = userId,
                 CreatedAt = DateTime.UtcNow
             };
 

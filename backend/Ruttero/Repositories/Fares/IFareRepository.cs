@@ -5,9 +5,9 @@ namespace Ruttero.Interfaces.Repositories
 {
     public interface IFareRepository
     {
-        Task<bool> ExistsByIdAsync(int Id);
+        Task<bool> ExistsByIdAsync(int id);
         Task CreateAsync(Fare fare);
-        Task<Fare?> GetByIdAsync(int Id);
+        Task<Fare?> GetByIdAsync(int id);
         Task UpdateAsync(Fare fare);
     }
 }

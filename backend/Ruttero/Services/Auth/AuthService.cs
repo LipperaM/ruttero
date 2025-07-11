@@ -52,9 +52,9 @@ namespace Ruttero.Services
             {
                 Username = requestDto.Username,
                 Email = requestDto.Email,
-                Password_Hash = password_Hash,
+                PasswordHash = password_Hash,
                 Role = "client",
-                Created_At = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow
             };
 
             await _userRepository.CreateAsync(newUser);
@@ -72,11 +72,11 @@ namespace Ruttero.Services
             if (user == null)
                 return null;
 
-            // Verificar el hash de la contraseña
-            if (!BCrypt.Net.BCrypt.Verify(requestDto.Password, user.Password_Hash))
+            // Verify password hash
+            if (!BCrypt.Net.BCrypt.Verify(requestDto.Password, user.PasswordHash))
                 return null;
 
-            // Generar claims para el JWT
+            // Generate JWT claims
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),

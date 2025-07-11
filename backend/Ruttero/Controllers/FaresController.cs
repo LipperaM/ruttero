@@ -32,6 +32,7 @@ namespace Ruttero.Controllers
         [HttpPost]
         public async Task<ActionResult<FareResponseDto>> Post([FromBody] CreateFareRequestDto requestDto)
         {
+            // Find userId in JWT token claims
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userIdString == null)

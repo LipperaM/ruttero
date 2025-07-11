@@ -9,7 +9,6 @@ using Ruttero.Services;
 using Ruttero.Interfaces.Services;
 using Ruttero.Interfaces.Repositories;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Read .env variables
@@ -17,7 +16,7 @@ builder.Configuration["Jwt:Key"] = Environment.GetEnvironmentVariable("JWT_KEY")
 builder.Configuration["Jwt:Issuer"] = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? builder.Configuration["Jwt:Issuer"];
 builder.Configuration["Jwt:Audience"] = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? builder.Configuration["Jwt:Audience"];
 
-// Db connection
+// DB connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -32,23 +31,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDriverService, DriverService>();
 builder.Services.AddScoped<IFareService, FareService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
 
 
 // Add repositories to the container.
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 builder.Services.AddScoped<IFareRepository, FareRepository>();
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
 
 // Enable JWT for Swagger
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new() { Title = "Ruttero API", Version = "v1" });
 
-    // Configuración para JWT Bearer en Swagger
     options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Name = "Authorization",

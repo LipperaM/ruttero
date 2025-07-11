@@ -7,7 +7,7 @@ namespace Ruttero.Interfaces.Repositories
     {
         Task<bool> ExistsByNationalIdAsync(string nationalId);
         Task CreateAsync(Driver driver);
-        Task<Driver?> GetByIdAsync(int Id);
+        Task<Driver?> GetByIdAsync(int id);
         Task UpdateAsync(Driver driver);
     }
 }

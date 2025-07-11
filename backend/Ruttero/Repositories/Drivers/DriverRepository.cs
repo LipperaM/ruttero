@@ -26,9 +26,9 @@ namespace Ruttero.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Driver?> GetByIdAsync(int Id)
+        public async Task<Driver?> GetByIdAsync(int id)
         {
-            return await _context.Drivers.FirstOrDefaultAsync(d => d.Id == Id);
+            return await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
         }
 
         public async Task UpdateAsync(Driver driver)
