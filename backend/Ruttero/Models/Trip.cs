@@ -5,10 +5,10 @@ namespace Ruttero.Models
 {
     public enum TripStatus
     {
-        Pending,
-        InProgress,
-        Completed,
-        Cancelled
+        pending,
+        active,
+        completed,
+        cancelled
     }
 
     [Table("trips")]
@@ -42,8 +42,9 @@ namespace Ruttero.Models
 
         public DateTime Date { get; set; }
 
-        public TripStatus Status { get; set; } = TripStatus.Pending;
+        public TripStatus Status { get; set; } = TripStatus.pending;
 
+        [Column("created_at")]
         public DateTime? CreatedAt { get; set; }
 
         [Column("is_active")]

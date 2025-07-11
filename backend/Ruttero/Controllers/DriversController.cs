@@ -1,3 +1,10 @@
+/*
+| Acción                | Método  | Ruta                |
+| --------------------- | ------  | --------------------|
+| Obtener todos         | GET     | `/api/drivers`      |
+| Obtener por ID        | GET     | `/api/drivers/{id}` |
+*/
+
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

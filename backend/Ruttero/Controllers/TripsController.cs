@@ -1,33 +1,33 @@
 /*
 | Acción                | Método  | Ruta              |
 | --------------------- | ------  | ------------------|
-| Obtener todos         | GET     | `/api/fares`      |
-| Obtener por ID        | GET     | `/api/fares/{id}` |
+| Obtener todos         | GET     | `/api/trips`      |
+| Obtener por ID        | GET     | `/api/trips/{id}` |
 */
 
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Ruttero.Dtos.Fares;
+using Ruttero.Dtos.Trips;
 using Ruttero.Interfaces.Services;
 
 namespace Ruttero.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/fares")]
-    public class FaresController : ControllerBase
+    [Route("api/trips")]
+    public class TripsController : ControllerBase
     {
-        private readonly IFareService _iFareService;
+        private readonly ITripService _iTripService;
 
-        public FaresController(IFareService iFareService)
+        public TripsController(ITripService iTripService)
         {
-            _iFareService = iFareService;
+            _iTripService = iTripService;
         }
 
-        // Create a fare
+        // Create a trip
         [HttpPost]
-        public async Task<ActionResult<FareResponseDto>> Post([FromBody] CreateFareRequestDto requestDto)
+        public async Task<ActionResult<TripResponseDto>> Post([FromBody] CreateTripRequestDto requestDto)
         {
             // Find userId in JWT token claims
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -37,13 +37,17 @@ namespace Ruttero.Controllers
 
             int userId = int.Parse(userIdString);
 
-            if (string.IsNullOrWhiteSpace(requestDto.Description) ||
-            requestDto.Price <= 0)
+            if (requestDto.DriverId <= 0 ||
+            requestDto.VehicleId <= 0 ||
+            requestDto.FareId <= 0 ||
+            string.IsNullOrWhiteSpace(requestDto.Origin) ||
+            string.IsNullOrWhiteSpace(requestDto.Destination) ||
+            requestDto.Date == DateTime.MinValue)
             {
                 return BadRequest("Complete todos los campos");
             }
 
-            var responseDto = await _iFareService.CreateFareAsync(requestDto, userId);
+            var responseDto = await _iTripService.CreateTripAsync(requestDto, userId);
 
             if (!responseDto.Success)
                 return BadRequest(responseDto.Message);
@@ -51,14 +55,14 @@ namespace Ruttero.Controllers
             return Ok(responseDto);
         }
 
-        // Update a fare status
+        // Update a trip status
         [HttpPatch]
-        public async Task<ActionResult<FareResponseDto>> Patch([FromBody] UpdateFareRequestDto requestDto)
+        public async Task<ActionResult<TripResponseDto>> Patch([FromBody] UpdateTripRequestDto requestDto)
         {
             if (requestDto.Id <= 0)
                 return BadRequest("ID inválido.");
 
-            var responseDto = await _iFareService.UpdateFareAsync(requestDto);
+            var responseDto = await _iTripService.UpdateTripAsync(requestDto);
 
             if (!responseDto.Success)
                 return NotFound(responseDto.Message);
