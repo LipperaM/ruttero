@@ -1,7 +1,6 @@
 /*
 | Acción                | Método  | Ruta              |
 | --------------------- | ------  | ------------------|
-| Obtener todos         | GET     | `/api/trips`      |
 | Obtener por ID        | GET     | `/api/trips/{id}` |
 */
 

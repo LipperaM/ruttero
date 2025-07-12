@@ -2,12 +2,12 @@
 .env
 
 # traefik
-traefik/acme.json
+infrastructure/traefik/acme.json
 
 # api
 ## Ignore build output folders
-bin/
-obj/
+**/bin/
+**/obj/
 
 ## Ignore Visual Studio workspace settings and caches
 .vs/
@@ -46,7 +46,7 @@ packages/
 docker-compose.override.yml
 
 # db
-/mysql/data/
+infrastructure/mysql/data/
 
 # VS Code
 .vscode/

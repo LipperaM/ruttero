@@ -1,7 +1,7 @@
 services:
   api:
     build:
-      context: ./backend/Ruttero
+      context: ./src/Ruttero
       dockerfile: Dockerfile
     ports:
       - "5000:80"
@@ -14,7 +14,7 @@ services:
       JWT_AUDIENCE: ${JWT_AUDIENCE}
     depends_on:
       - mysql 
-    networks:                                                                                                                                                                              
+    networks:                                                                            
       - net  
 
   mysql:
@@ -29,8 +29,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./infrastructure/mysql/data:/var/lib/mysql
+      - ./infrastructure/mysql/init:/docker-entrypoint-initdb.d
     networks:
       - net
 
