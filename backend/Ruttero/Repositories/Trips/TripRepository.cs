@@ -32,5 +32,15 @@ namespace Ruttero.Repositories
             _context.Trips.Update(trip);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Trip>> GetAllTripsAsync(int userId)
+        {
+            return await _context.Trips
+                .Include(t => t.Driver)
+                .Include(t => t.Vehicle)
+                .Include(t => t.Fare)
+                .Where(t => t.CreatedBy == userId && t.IsActive)
+                .ToListAsync();
+        }
     }
 }

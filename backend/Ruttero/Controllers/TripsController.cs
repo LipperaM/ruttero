@@ -69,5 +69,22 @@ namespace Ruttero.Controllers
 
             return Ok(responseDto);
         }
+
+        // Get all trips created by the user
+        [HttpGet]
+        public async Task<ActionResult<GetAllTripsDto>> Get()
+        {
+            // Find userId in JWT token claims
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userIdString == null)
+                return Unauthorized();
+
+            int userId = int.Parse(userIdString);
+
+            var responseDto = await _iTripService.GetAllTripsAsync(userId);
+
+            return Ok(responseDto);
+        }
     }
 }

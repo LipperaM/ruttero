@@ -8,5 +8,7 @@ namespace Ruttero.Interfaces.Repositories
         Task CreateAsync(Trip trip);
         Task<Trip?> GetByIdAsync(int id);
         Task UpdateAsync(Trip trip);
+        Task<List<Trip>> GetAllTripsAsync(int userId);
+
     }
 }

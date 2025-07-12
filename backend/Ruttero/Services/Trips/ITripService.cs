@@ -7,5 +7,7 @@ namespace Ruttero.Interfaces.Services
     {
         Task<TripResponseDto> CreateTripAsync(CreateTripRequestDto requestDto, int userId);
         Task<TripResponseDto> UpdateTripAsync(UpdateTripRequestDto requestDto);
+        Task<List<GetAllTripsDto>> GetAllTripsAsync(int userId);
+
     }
 }
