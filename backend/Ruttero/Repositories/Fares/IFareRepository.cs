@@ -9,5 +9,6 @@ namespace Ruttero.Interfaces.Repositories
         Task CreateAsync(Fare fare);
         Task<Fare?> GetByIdAsync(int id);
         Task UpdateAsync(Fare fare);
+        Task<List<Fare>> GetAllFaresAsync(int userId);
     }
 }

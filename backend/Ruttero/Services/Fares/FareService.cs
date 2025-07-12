@@ -62,5 +62,19 @@ namespace Ruttero.Services
                 Message = $"La tarifa fue {(fare.IsActive ? "reactivada" : "desactivada")} exitosamente."
             };
         }
+
+        public async Task<List<GetAllFaresDto>> GetAllFaresAsync(int userId)
+        {
+            var fares = await _fareRepository.GetAllFaresAsync(userId);
+
+            var responseDto = fares.Select(f => new GetAllFaresDto
+            {
+                Id = f.Id,
+                Description = f.Description,
+                Price = f.Price
+            }).ToList();
+
+            return responseDto;
+        }
     }
 }

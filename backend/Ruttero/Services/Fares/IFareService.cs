@@ -7,5 +7,6 @@ namespace Ruttero.Interfaces.Services
     {
         Task<FareResponseDto> CreateFareAsync(CreateFareRequestDto requestDto, int userId);
         Task<FareResponseDto> UpdateFareAsync(UpdateFareRequestDto requestDto);
+        Task<List<GetAllFaresDto>> GetAllFaresAsync(int userId);
     }
 }

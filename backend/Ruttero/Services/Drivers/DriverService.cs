@@ -72,5 +72,20 @@ namespace Ruttero.Services
                 Message = $"El conductor fue {(driver.IsActive ? "reactivado" : "desactivado")} exitosamente."
             };
         }
+
+        public async Task<List<GetAllDriversDto>> GetAllDriversAsync(int userId)
+        {
+            var drivers = await _driverRepository.GetAllDriversAsync(userId);
+
+            var responseDto = drivers.Select(d => new GetAllDriversDto
+            {
+                Id = d.Id,
+                Name = d.Name,
+                Surname = d.Surname,
+                NationalId = d.NationalId
+            }).ToList();
+
+            return responseDto;
+        }
     }
 }

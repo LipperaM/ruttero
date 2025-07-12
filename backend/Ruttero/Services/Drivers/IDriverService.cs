@@ -6,5 +6,6 @@ namespace Ruttero.Interfaces.Services
     {
         Task<DriverResponseDto> CreateDriverAsync(CreateDriverRequestDto requestDto, int userId);
         Task<DriverResponseDto> UpdateDriverAsync(UpdateDriverRequestDto requestDto);
+        Task<List<GetAllDriversDto>> GetAllDriversAsync(int userId);
     }
 }

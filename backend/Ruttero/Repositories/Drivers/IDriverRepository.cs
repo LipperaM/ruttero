@@ -9,6 +9,7 @@ namespace Ruttero.Interfaces.Repositories
         Task CreateAsync(Driver driver);
         Task<Driver?> GetByIdAsync(int id);
         Task UpdateAsync(Driver driver);
+        Task<List<Driver>> GetAllDriversAsync(int userId);
     }
 }
 

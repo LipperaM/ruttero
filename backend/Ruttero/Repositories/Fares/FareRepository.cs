@@ -3,6 +3,7 @@ using Ruttero.Models;
 using Ruttero.Data;
 using Microsoft.EntityFrameworkCore;
 using Ruttero.Interfaces.Repositories;
+using System.ComponentModel;
 
 
 namespace Ruttero.Repositories
@@ -35,6 +36,13 @@ namespace Ruttero.Repositories
         {
             _context.Fares.Update(fare);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Fare>> GetAllFaresAsync(int userId)
+        {
+            return await _context.Fares
+                .Where(f => f.CreatedBy == userId && f.IsActive)
+                .ToListAsync();
         }
     }
 }

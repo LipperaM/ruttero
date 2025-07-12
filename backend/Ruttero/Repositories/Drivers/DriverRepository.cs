@@ -36,5 +36,12 @@ namespace Ruttero.Repositories
             _context.Drivers.Update(driver);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Driver>> GetAllDriversAsync(int userId)
+        {
+            return await _context.Drivers
+                .Where(d => d.CreatedBy == userId && d.IsActive)
+                .ToListAsync();
+        }
     }
 }

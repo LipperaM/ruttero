@@ -8,6 +8,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Ruttero.Dtos.Drivers;
 using Ruttero.Interfaces.Services;
 using Ruttero.Models;
@@ -64,6 +65,23 @@ namespace Ruttero.Controllers
 
             if (!responseDto.Success)
                 return NotFound(responseDto.Message);
+
+            return Ok(responseDto);
+        }
+
+        // Get all drivers created by the user
+        [HttpGet]
+        public async Task<ActionResult<GetAllDriversDto>> Get()
+        {
+            // Find userId in JWT token claims
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userIdString == null)
+                return Unauthorized();
+
+            int userId = int.Parse(userIdString);
+
+            var responseDto = await _iDriverService.GetAllDriversAsync(userId);
 
             return Ok(responseDto);
         }
