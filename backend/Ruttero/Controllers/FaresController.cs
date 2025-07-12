@@ -1,7 +1,6 @@
 /*
 | Acción                | Método  | Ruta              |
 | --------------------- | ------  | ------------------|
-| Obtener todos         | GET     | `/api/fares`      |
 | Obtener por ID        | GET     | `/api/fares/{id}` |
 */
 
@@ -66,7 +65,7 @@ namespace Ruttero.Controllers
             return Ok(responseDto);
         }
 
-        // Get all drivers created by the user
+        // Get all fares created by the user
         [HttpGet]
         public async Task<ActionResult<GetAllFaresDto>> Get()
         {

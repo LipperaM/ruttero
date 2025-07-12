@@ -36,5 +36,12 @@ namespace Ruttero.Repositories
             _context.Vehicles.Update(vehicle);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Vehicle>> GetAllVehiclesAsync(int userId)
+        {
+            return await _context.Vehicles
+                .Where(v => v.CreatedBy == userId && v.IsActive)
+                .ToListAsync();
+        }
     }
 }

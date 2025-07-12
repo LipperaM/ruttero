@@ -1,7 +1,6 @@
 /*
 | Acción                | Método  | Ruta                 |
 | --------------------- | ------  | -------------------- |
-| Obtener todos         | GET     | `/api/vehicles`      |
 | Obtener por ID        | GET     | `/api/vehicles/{id}` |
 */
 
@@ -64,6 +63,23 @@ namespace Ruttero.Controllers
 
             if (!responseDto.Success)
                 return NotFound(responseDto.Message);
+
+            return Ok(responseDto);
+        }
+
+        // Get all vehicles created by the user
+        [HttpGet]
+        public async Task<ActionResult<GetAllVehiclesDto>> Get()
+        {
+            // Find userId in JWT token claims
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userIdString == null)
+                return Unauthorized();
+
+            int userId = int.Parse(userIdString);
+
+            var responseDto = await _iVehicleService.GetAllVehiclesAsync(userId);
 
             return Ok(responseDto);
         }

@@ -9,6 +9,7 @@ namespace Ruttero.Interfaces.Repositories
         Task CreateAsync(Vehicle vehicle);
         Task<Vehicle?> GetByIdAsync(int id);
         Task UpdateAsync(Vehicle vehicle);
+        Task<List<Vehicle>> GetAllVehiclesAsync(int userId);
     }
 }
 

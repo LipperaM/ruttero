@@ -72,5 +72,20 @@ namespace Ruttero.Services
                 Message = $"El Vehiculo fue {(vehicle.IsActive ? "reactivado" : "desactivado")} exitosamente."
             };
         }
+
+        public async Task<List<GetAllVehiclesDto>> GetAllVehiclesAsync(int userId)
+        {
+            var vehicles = await _vehicleRepository.GetAllVehiclesAsync(userId);
+
+            var responseDto = vehicles.Select(v => new GetAllVehiclesDto
+            {
+                Id = v.Id,
+                LicensePlate = v.LicensePlate,
+                Model = v.Model,
+                Brand = v.Brand
+            }).ToList();
+
+            return responseDto;
+        }
     }
 }
