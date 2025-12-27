@@ -1,5 +1,5 @@
 This README contains both English and Spanish versions.
-Versión en inglés arriba / Versión en español más abajo.
+Versión en Español más abajo.
 
 This application is designed as a logistics tracking system, featuring trip management with entities such as users, vehicles, drivers, and fares. It is currently under active development and will implement a full-stack RESTful API using ASP.NET Core with C#. The backend handles user management, authentication, and authorization via JWT tokens. Data persistence is managed with MySQL, accessed through Entity Framework Core as the ORM.
 
