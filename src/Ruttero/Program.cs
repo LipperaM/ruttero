@@ -6,6 +6,7 @@ using Ruttero.Data;
 using System.Text;
 using Ruttero.Repositories;
 using Ruttero.Services;
+using Ruttero.Services.Supabase;
 using Ruttero.Interfaces.Services;
 using Ruttero.Interfaces.Repositories;
 
@@ -38,6 +39,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 
 // Add services to the container.
+builder.Services.AddScoped<ISupabaseAuthService, SupabaseAuthService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDriverService, DriverService>();
 builder.Services.AddScoped<IFareService, FareService>();
@@ -87,15 +89,10 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
-// JWT
-var jwtKey = builder.Configuration["Jwt:Key"]
-    ?? throw new InvalidOperationException("JWT Key is not configured.");
-
-var jwtIssuer = builder.Configuration["Jwt:Issuer"]
-    ?? throw new InvalidOperationException("JWT Issuer is not configured.");
-
-var jwtAudience = builder.Configuration["Jwt:Audience"]
-    ?? throw new InvalidOperationException("JWT Audience is not configured.");
+// JWT Configuration for Supabase Auth
+var supabaseJwtSecret = Environment.GetEnvironmentVariable("SUPABASE_JWT_SECRET") 
+    ?? builder.Configuration["Supabase:JwtSecret"]
+    ?? throw new InvalidOperationException("Supabase JWT Secret is not configured.");
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -106,9 +103,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtIssuer,
-            ValidAudience = jwtAudience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+            ValidIssuer = Environment.GetEnvironmentVariable("API_EXTERNAL_URL") ?? "http://localhost:9999",
+            ValidAudience = "authenticated",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(supabaseJwtSecret)),
+            ClockSkew = TimeSpan.Zero
         };
     });
 
