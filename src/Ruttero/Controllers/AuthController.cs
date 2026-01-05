@@ -9,7 +9,7 @@ namespace Ruttero.Controllers
 {
     // SignUp
     [ApiController]
-    [Route("api/signup")]
+    [Route("signup")]
     public class SignUpController : ControllerBase
     {
         // Inject dependency: IAuthService
@@ -42,7 +42,7 @@ namespace Ruttero.Controllers
 
     // Login
     [ApiController]
-    [Route("api/login")]
+    [Route("login")]
     public class LoginController : ControllerBase
     {
         // Inject dependency: IAuthService

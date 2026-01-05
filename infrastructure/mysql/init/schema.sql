@@ -127,15 +127,16 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
+  `supabase_user_id` varchar(36) NOT NULL COMMENT 'UUID from Supabase Auth',
+  `username` varchar(100) DEFAULT NULL,
   `role` enum('admin','client') DEFAULT 'client',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `supabase_user_id` (`supabase_user_id`),
+  UNIQUE KEY `username` (`username`),
+  INDEX `idx_supabase_id` (`supabase_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='User profiles linked to Supabase Auth';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +145,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'string','string','$2a$11$mC32rX6ep4f/O0r3t.JA.e6DVB3gGWqVa6wGSkLzAw.byRlhSrXoq','client','2025-07-10 21:25:24'),(6,'st','st','$2a$11$X0qIt72ekDwbEFyAUX0NJudH2ZyvKavK6wxdTRUEECGvhKIH1cU2.','client','2025-07-11 00:13:15');
+-- No initial users to insert
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
