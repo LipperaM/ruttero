@@ -52,3 +52,12 @@ infrastructure/mysql/data/
 .vscode/
 *.code-workspace
 
+# Backups
+backups/
+*.backup
+*.sql.gz
+
+# Frontend build
+frontend/dist/
+frontend/.angular/
+frontend/node_modules/
