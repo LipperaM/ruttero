@@ -14,7 +14,7 @@ namespace Ruttero.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/trips")]
+    [Route("trips")]
     public class TripsController : ControllerBase
     {
         private readonly ITripService _iTripService;

@@ -16,7 +16,7 @@ namespace Ruttero.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/drivers")]
+    [Route("drivers")]
     public class DriversController : ControllerBase
     {
         private readonly IDriverService _iDriverService;

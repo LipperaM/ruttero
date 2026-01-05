@@ -15,7 +15,7 @@ namespace Ruttero.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/vehicles")]
+    [Route("vehicles")]
     public class VehiclesController : ControllerBase
     {
         private readonly IVehicleService _iVehicleService;
