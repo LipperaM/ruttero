@@ -1,0 +1,23 @@
+<div class="home-container">
+  <nav class="navbar">
+    <div class="nav-content">
+      <h1>Ruttero</h1>
+      <div class="user-section" *ngIf="currentUser">
+        <span class="user-email">{{ currentUser.email }}</span>
+        <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="welcome-card">
+      <h2>Bienvenido!</h2>
+      <p *ngIf="currentUser">Has iniciado sesión como: <strong>{{ currentUser.email }}</strong></p>
+    </div>
+
+    <div class="info-card">
+      <h3>Información del usuario</h3>
+      <pre *ngIf="currentUser">{{ currentUser | json }}</pre>
+    </div>
+  </main>
+</div>
