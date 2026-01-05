@@ -15,7 +15,6 @@ export class AuthService {
 
   constructor() {
     // Initialize Supabase client
-    // Direct routes without /auth/v1/
     this.supabase = createClient(
       'http://localhost',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvY2FsaG9zdCIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNjQxNzY5MjAwLCJleHAiOjE5NTczNDUyMDB9.dc6hdXRbT-LTv3JN6cQYRGAkVZAJJOWfkTXeBKkWVQg',
@@ -30,10 +29,6 @@ export class AuthService {
           headers: {
             'Content-Type': 'application/json'
           }
-        },
-        // Set GoTrue routes
-        db: {
-          schema: 'public'
         }
       }
     );
