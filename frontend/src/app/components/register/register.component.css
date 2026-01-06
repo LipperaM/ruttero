@@ -3,8 +3,9 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #95B2B8 0%, #70163C 100%);
+  background: var(--gradient-background);
   padding: 20px;
+  padding-top: 64px;
 }
 
 .register-card {

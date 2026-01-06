@@ -26,7 +26,7 @@ export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   onSubmit(): void {
     if (!this.credentials.email || !this.credentials.password || !this.credentials.confirmPassword) {
