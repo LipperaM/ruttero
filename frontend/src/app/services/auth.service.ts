@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, firstValueFrom } from 'rxjs';
 import { createClient, SupabaseClient, User, Session } from '@supabase/supabase-js';
+import { filter, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,11 @@ export class AuthService {
   private supabase: SupabaseClient;
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   private currentSessionSubject = new BehaviorSubject<Session | null>(null);
+  private sessionLoadedSubject = new BehaviorSubject<boolean>(false);
   
   public currentUser$ = this.currentUserSubject.asObservable();
   public currentSession$ = this.currentSessionSubject.asObservable();
+  public sessionLoaded$ = this.sessionLoadedSubject.asObservable();
 
   constructor() {
     // Initialize Supabase client
@@ -45,11 +48,26 @@ export class AuthService {
   }
 
   private async loadSession() {
-    const { data: { session } } = await this.supabase.auth.getSession();
-    if (session) {
-      this.currentSessionSubject.next(session);
-      this.currentUserSubject.next(session.user);
+    try {
+      const { data: { session } } = await this.supabase.auth.getSession();
+      if (session) {
+        this.currentSessionSubject.next(session);
+        this.currentUserSubject.next(session.user);
+      }
+    } catch (error) {
+      console.error('Error loading session:', error);
+    } finally {
+      this.sessionLoadedSubject.next(true);
     }
+  }
+
+  async waitForSessionLoad(): Promise<void> {
+    await firstValueFrom(
+      this.sessionLoaded$.pipe(
+        filter(loaded => loaded),
+        take(1)
+      )
+    );
   }
 
   login(email: string, password: string): Observable<{ user: User | null; session: Session | null }> {
@@ -80,6 +98,16 @@ export class AuthService {
   logout(): Observable<void> {
     return from(
       this.supabase.auth.signOut().then(({ error }) => {
+        if (error) throw error;
+      })
+    );
+  }
+
+  recoverPassword(email: string): Observable<void> {
+    return from(
+      this.supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'http://localhost/reset-password'
+      }).then(({ error }) => {
         if (error) throw error;
       })
     );
