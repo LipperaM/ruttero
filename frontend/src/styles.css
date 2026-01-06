@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+    --gradient-background: linear-gradient(135deg, #95B2B8 0%, #70163C 100%);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,14 +1,14 @@
-.login-container {
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 64px);
+  min-height: 100vh;
   background: var(--gradient-background);
   padding: 20px;
   padding-top: 64px;
 }
 
-.login-card {
+.register-card {
   background: white;
   padding: 40px;
   border-radius: 12px;
@@ -75,7 +75,7 @@ input:disabled {
   text-align: center;
 }
 
-.btn-login {
+.btn-register {
   width: 100%;
   padding: 14px;
   background: linear-gradient(135deg, #95B2B8 0%, #307351 100%);
@@ -88,16 +88,16 @@ input:disabled {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-login:hover:not(:disabled) {
+.btn-register:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-.btn-login:active:not(:disabled) {
+.btn-register:active:not(:disabled) {
   transform: translateY(0);
 }
 
-.btn-login:disabled {
+.btn-register:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
