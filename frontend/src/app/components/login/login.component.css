@@ -2,9 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: calc(100vh - 64px);
+  background: var(--gradient-background);
   padding: 20px;
+  padding-top: 64px;
 }
 
 .login-card {
@@ -77,7 +78,7 @@ input:disabled {
 .btn-login {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #95B2B8 0%, #307351 100%);
   color: white;
   border: none;
   border-radius: 8px;
