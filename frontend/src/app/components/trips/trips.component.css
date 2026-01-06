@@ -8,7 +8,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
-  font-family: 'Segoe UI', Roboto, Ubuntu, Arial, sans-serif; 
+  font-family: 'Segoe UI', Roboto, Ubuntu, Arial, sans-serif;
 }
 
 .table-container {
@@ -70,6 +70,10 @@
 }
 
 @media (max-width: 768px) {
+  .trips-container {
+    padding-top: 0px;
+  }
+
   .welcome-card,
   .info-card {
     padding: 20px;

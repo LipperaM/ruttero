@@ -45,7 +45,7 @@ export class RegisterComponent {
     this.authService.signup(this.credentials.email, this.credentials.password).subscribe({
       next: (response) => {
         console.log('Registro exitoso:', response);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       },
       error: (error) => {
         console.error('Error en registro:', error);

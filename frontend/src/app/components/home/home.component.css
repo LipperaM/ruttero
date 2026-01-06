@@ -53,6 +53,9 @@ pre {
 }
 
 @media (max-width: 768px) {
+  .home-container {
+  padding-top: 0px;
+}
   .welcome-card,
   .info-card {
     padding: 20px;

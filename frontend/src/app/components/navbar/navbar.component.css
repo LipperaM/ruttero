@@ -14,7 +14,7 @@
   margin: 0 auto;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
+  /*  justify-content: space-between; */
   align-items: center;
 }
 
@@ -37,11 +37,31 @@
   display: block;
 }
 
+.nav-links {
+  display: flex;
+  gap: 20px;
+  margin-left: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+
+.nav-links a.active-link {
+  color: #000;
+  font-weight: 600;
+}
+
+
 .user-section {
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 16px;
 }
+
 
 .user-email {
   color: #666;
@@ -65,12 +85,38 @@
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    position: relative; /* empieza en flujo normal */
+    top: 0;
+    transition: top 0.3s ease;
+  }
+
+  .navbar.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
   .nav-content {
     flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+
+  .nav-links {
+    margin-left: 0;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 16px;
   }
 
   .user-section {
+    margin-left: 0;
+    justify-content: center;
     flex-direction: column;
     gap: 8px;
   }

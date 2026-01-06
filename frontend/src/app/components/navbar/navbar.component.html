@@ -1,9 +1,17 @@
 <nav class="navbar">
   <div class="nav-content">
-    <a routerLink="/home" class="brand">
+    <a routerLink="/" class="brand">
       <img src="/favicon-32x32.png" alt="Ruttero" width="32" height="32">
       <span>Ruttero</span>
     </a>
+
+    <div class="nav-links" *ngIf="currentUser">
+      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+      <a routerLink="/trips" routerLinkActive="active-link">Viajes</a>
+      <a routerLink="/drivers" routerLinkActive="active-link">Choferes</a>
+      <a routerLink="/vehicles" routerLinkActive="active-link">Vehículos</a>
+    </div>
+
     <div class="user-section" *ngIf="currentUser">
       <span class="user-email">{{ currentUser.email }}</span>
       <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
