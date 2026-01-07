@@ -12,9 +12,20 @@
       <a routerLink="/vehicles" routerLinkActive="active-link">Vehículos</a>
     </div>
 
-    <div class="user-section" *ngIf="currentUser">
-      <span class="user-email">{{ currentUser.email }}</span>
-      <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+    <div class="dropdown" *ngIf="currentUser">
+      <div class="hamburger" (click)="toggleDropdown()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="dropdown-menu" *ngIf="isDropdownOpen">
+        <li><span class="user-email">{{ currentUser.email }}</span></li>
+
+        <li><a routerLink="/profile" (click)="toggleDropdown()">Perfil</a></li>
+        <li><a routerLink="/settings" (click)="toggleDropdown()">Ajustes</a></li>
+        <li><a (click)="logout(); toggleDropdown()">Cerrar sesión</a></li>
+      </ul>
     </div>
   </div>
 </nav>

@@ -11,13 +11,15 @@ import { User } from '@supabase/supabase-js';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
   currentUser: User | null = null;
+  isDropdownOpen = false;
 
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.authService.currentUser$.subscribe(user => {
@@ -35,5 +37,9 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     });
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
