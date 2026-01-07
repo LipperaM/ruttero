@@ -6,14 +6,14 @@
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" [(ngModel)]="credentials.email" required email
-          placeholder="tu@email.com" [disabled]="isLoading" autofocus />
+        <input #emailInput type="email" id="email" name="email" [(ngModel)]="credentials.email" required email
+          placeholder="tu@email.com"/>
       </div>
 
       <div class="form-group">
         <label for="password">Contraseña</label>
         <input type="password" id="password" name="password" [(ngModel)]="credentials.password" required
-          placeholder="••••••••" [disabled]="isLoading" />
+          placeholder="••••••••"/>
       </div>
 
       <div class="error-message" *ngIf="errorMessage">
