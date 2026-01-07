@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core'; import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -12,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
   credentials = {
     email: '',
     password: ''
@@ -22,8 +22,9 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   onSubmit(): void {
     if (!this.credentials.email || !this.credentials.password) {
@@ -34,19 +35,27 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.authService.login(this.credentials.email, this.credentials.password).subscribe({
-      next: (response) => {
-        console.log('Login exitoso:', response);
-        this.router.navigate(['/']);
-      },
-      error: (error) => {
-        console.error('Error en login:', error);
-        this.errorMessage = error.message || 'Error al iniciar sesión. Verifica tus credenciales.';
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+    this.authService
+      .login(this.credentials.email, this.credentials.password)
+      .subscribe({
+        next: (response) => {
+          console.log('Login exitoso:', response);
+          this.isLoading = false;
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          console.error('Error en login:', error);
+          this.errorMessage =
+            error?.message || 'Error al iniciar sesión. Verifica tus credenciales.';
+          this.isLoading = false;
+
+          this.cdr.detectChanges();
+
+          // Focus back to email input after error
+          setTimeout(() => {
+            this.emailInput.nativeElement.focus();
+          });
+        }
+      });
   }
 }
