@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component'; 
 import { TripsComponent } from './components/trips/trips.component';
+import { DriversComponent } from './components/drivers/drivers.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'trips', component: TripsComponent, canActivate: [authGuard] },
+  { path: 'drivers', component: DriversComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];
