@@ -6,6 +6,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component'; 
 import { TripsComponent } from './components/trips/trips.component';
 import { DriversComponent } from './components/drivers/drivers.component';
+import { VehiclesComponent } from './components/vehicles/vehicles.component'; 
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'trips', component: TripsComponent, canActivate: [authGuard] },
   { path: 'drivers', component: DriversComponent, canActivate: [authGuard] },
+  { path: 'vehicles', component: VehiclesComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];
