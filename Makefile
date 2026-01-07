@@ -114,7 +114,7 @@ clean:
 ## dev: Starts development environment
 dev:
 	@echo "Starting dev environment..."
-	$(DOCKER_COMPOSE) up
+	$(DOCKER_COMPOSE) up -d
 
 ## dev-api: Only backend in development
 dev-api:
