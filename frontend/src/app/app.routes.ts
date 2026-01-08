@@ -8,6 +8,7 @@ import { TripsComponent } from './components/trips/trips.component';
 import { DriversComponent } from './components/drivers/drivers.component';
 import { VehiclesComponent } from './components/vehicles/vehicles.component'; 
 import { authGuard } from './guards/auth.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: 'trips', component: TripsComponent, canActivate: [authGuard] },
   { path: 'drivers', component: DriversComponent, canActivate: [authGuard] },
   { path: 'vehicles', component: VehiclesComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];
