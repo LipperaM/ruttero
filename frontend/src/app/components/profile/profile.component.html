@@ -1,0 +1,13 @@
+<div class="profile-container">
+  <main class="main-content">
+    <div class="welcome-card">
+      <h2>Bienvenido!</h2>
+      <p *ngIf="currentUser">Has iniciado sesión como: <strong>{{ currentUser.email }}</strong></p>
+    </div>
+
+    <div class="info-card">
+      <h3>Información del usuario</h3>
+      <pre *ngIf="currentUser">{{ currentUser | json }}</pre>
+    </div>
+  </main>
+</div>
