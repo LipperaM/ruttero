@@ -1,0 +1,63 @@
+.profile-container {
+  min-height: 100vh;
+  background: var(--gradient-background);
+  padding-top: 64px;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.welcome-card,
+.info-card {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.welcome-card h2 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 32px;
+}
+
+.welcome-card p {
+  margin: 8px 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.status {
+  color: #4caf50 !important;
+  font-weight: 600;
+  margin-top: 16px !important;
+}
+
+.info-card h3 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 20px;
+}
+
+pre {
+  background: #f5f5f5;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 14px;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+  padding-top: 0px;
+}
+  .welcome-card,
+  .info-card {
+    padding: 20px;
+  }
+}
